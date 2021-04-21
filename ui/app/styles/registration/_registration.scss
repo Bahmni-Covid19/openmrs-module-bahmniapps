@@ -143,7 +143,7 @@ body{
 .ndhm {
   .ngdialog-content {
     width: 800px !important;
-    height: 600px !important;
+    height: 640px !important;
     background: white !important;
   }
   .NDHM-template{
@@ -152,6 +152,7 @@ body{
               width:50%;
               text-align:center;
               border:0.5px solid rgb(190, 190, 190);
+              word-wrap: break-word;
           }
           table-layout:fixed;
           border:1px solid black;
