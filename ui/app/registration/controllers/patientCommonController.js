@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('bahmni.registration')
-    .controller('PatientCommonController', ['$scope', '$rootScope', '$http', 'patientAttributeService', 'appService', 'spinner', '$location', 'ngDialog', '$window', '$state', '$document',
-        function ($scope, $rootScope, $http, patientAttributeService, appService, spinner, $location, ngDialog, $window, $state, $document) {
+    .controller('PatientCommonController', ['$scope', '$rootScope', '$http', 'patientAttributeService', 'appService', 'spinner', '$location', 'ngDialog', '$window', '$state', '$document', '$timeout',
+        function ($scope, $rootScope, $http, patientAttributeService, appService, spinner, $location, ngDialog, $window, $state, $document, $timeout) {
             var autoCompleteFields = appService.getAppDescriptor().getConfigValue("autoCompleteFields", []);
             var showCasteSameAsLastNameCheckbox = appService.getAppDescriptor().getConfigValue("showCasteSameAsLastNameCheckbox");
             var personAttributes = [];
@@ -20,14 +20,25 @@ angular.module('bahmni.registration')
             $scope.ndhmExtPoint = appService.getAppDescriptor().getExtensions("org.bahmni.registration.identifier.ndhm.source", "link")[0];
             $scope.ndhmIframeSrc = $scope.ndhmExtPoint.src;
             $scope.showNdhmIframe = false;
-            
+
             $scope.openNdhmPopup = function () {
                 var ndhmframe = $document[0].getElementById("ndhm");
                 $scope.showNdhmIframe = true;
                 $window.addEventListener("message", function (healthId) {
-                    console.log("Obtained Health ID from NDHM" + healthId.data);
+                    $scope.healthIdSaved = healthId.data;
+                    $scope.showVeriyHealthIdBtn = true;
+                    $scope.showNdhmIframe = false;
+                    for (var i = 0; i < $scope.patient.extraIdentifiers.length; i++) {
+                        var identifier = $scope.patient.extraIdentifiers[i];
+                        if (identifier.identifierType.name === Bahmni.Registration.Constants.patientIdentifiers.healthId) {
+                            identifier.registrationNumber = $scope.healthIdSaved;
+                            identifier.generate();
+                            break;
+                        }
+                    }
+                    $scope.$digest();
                 }, false);
-                $window.setTimeout(function () {
+                $timeout(function () {
                     ndhmframe.contentWindow.postMessage({call: "hipUrl", value: $scope.ndhmExtPoint.extensionParams.hipUrl});
                 }, 2000);
             };
