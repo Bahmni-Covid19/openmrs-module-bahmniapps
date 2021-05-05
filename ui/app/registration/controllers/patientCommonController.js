@@ -18,8 +18,9 @@ angular.module('bahmni.registration')
             $scope.showSaveConfirmDialogConfig = appService.getAppDescriptor().getConfigValue("showSaveConfirmDialog");
             $scope.showSaveAndContinueButton = false;
             $scope.ndhmExtPoint = appService.getAppDescriptor().getExtensions("org.bahmni.registration.identifier.ndhm.source", "link")[0];
-
+            $scope.ndhmIframeSrc = $scope.ndhmExtPoint.src;
             $scope.showNdhmIframe = false;
+            
             $scope.openNdhmPopup = function () {
                 var ndhmframe = $document[0].getElementById("ndhm");
                 $scope.showNdhmIframe = true;
@@ -28,7 +29,7 @@ angular.module('bahmni.registration')
                 }, false);
                 $window.setTimeout(function () {
                     ndhmframe.contentWindow.postMessage({call: "hipUrl", value: $scope.ndhmExtPoint.extensionParams.hipUrl});
-                }, 1000);
+                }, 2000);
             };
 
             function initPatientNameDisplayOrder () {

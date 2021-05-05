@@ -221,7 +221,7 @@
                 </div>
             </section>
             <div class="ndhm-ui"  ng-hide="!showNdhmIframe">
-                <iframe name="NDHM Health Verfication" id="ndhm" ng-src="/ndhm/index.html" height="100%" width="100%"></iframe>
+                <iframe name="ndhm-health-verfication" id="ndhm" ng-src="{{ndhmIframeSrc}}" height="100%" width="100%"></iframe>
             </div>
             <button ng-if="ndhmExtPoint != undefined" class="verify-health-id-btn" type="button" ng-click="openNdhmPopup()">Verify Health ID</button>
             <br>
