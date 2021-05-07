@@ -24,16 +24,15 @@ jobs:
     - uses: actions/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
-    - run: sudo npm install -g bower --force
-    - run: sudo npm install grunt --force
-    - run: sudo gem install compass  --force
-    - run : sudo npm install --global yarn --force
-    - run : sudo npm cache clean --force 
-    - run : sudo bower cache clean --force 
+    - run:  npm install -g bower 
+    - run:  npm install -g grunt-cli 
+    - run:  gem install compass  
+    - run: npm install --global yarn 
+    - run : cd ui/ 
+    - run : npm cache clean  
+    - run : bower cache clean  
     - run : rm -rf coverage/ 
-    - run : cd ui && yarn
-    - run : cd ui && sudo yarn ci --force
-    - run : cd ui/dist && zip -r ../target/bahmniapps.zip *
+    - run: /bin/bash ./scripts/package.sh
     - uses: actions/upload-artifact@v2
       with:
         name: BahmniApps
