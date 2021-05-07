@@ -24,7 +24,7 @@ jobs:
     - uses: actions/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
-    - run : cd ui/scripts 
+    - run : cd ui
     - run: npm install -g bower 
     - run: npm install -g grunt-cli 
     - run: sudo gem install compass  
