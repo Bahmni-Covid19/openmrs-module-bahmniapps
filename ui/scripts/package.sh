@@ -10,6 +10,7 @@ ZIP_FILE_NAME=bahmniapps
 mkdir -p $ROOT_DIR/target
 rm -rf $ROOT_DIR/target/${ZIP_FILE_NAME}*.zip
 
+cd ui
 yarn install
 yarn bundle
 yarn uglify-and-rename
