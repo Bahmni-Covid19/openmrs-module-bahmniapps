@@ -24,10 +24,10 @@ jobs:
     - uses: actions/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
-    - run: sudo npm install -g bower 
-    - run: sudo npm install -g grunt-cli 
-    - run: sudo gem install compass  
-    - run : sudo npm install --global yarn
+    - run: sudo npm install -g bower --force
+    - run: sudo npm install -g grunt-cli  --force
+    - run: sudo gem install compass  --force
+    - run : sudo npm install --global yarn --force
     - run : sudo npm cache clean --force 
     - run : sudo bower cache clean --force 
     - run : rm -rf coverage/ 
