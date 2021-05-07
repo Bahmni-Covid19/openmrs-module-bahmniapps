@@ -32,6 +32,7 @@ jobs:
     - run : npm cache clean --force 
     - run : bower cache clean --force 
     - run : rm -rf coverage/ 
+    - run : pwd
     - run : bash /scripts/package.sh
     - uses: actions/upload-artifact@v2
       with:
