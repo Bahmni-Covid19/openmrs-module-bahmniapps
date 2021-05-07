@@ -29,7 +29,6 @@ jobs:
     - run:  gem install compass  
     - run: npm install --global yarn 
     - run : cd ui/ 
-    - run : npm cache clean  
     - run : bower cache clean  
     - run : rm -rf coverage/ 
     - run: /bin/bash ./scripts/package.sh
