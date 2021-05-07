@@ -32,7 +32,8 @@ jobs:
     - run : npm cache clean --force 
     - run : bower cache clean --force 
     - run : rm -rf coverage/ 
-    - run : bash package.sh
+    - run : sudo yarn default --force
+    - run : cd dist && zip -r ../target/bahmniapps.zip *
     - uses: actions/upload-artifact@v2
       with:
         name: BahmniApps
