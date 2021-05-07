@@ -27,7 +27,7 @@ jobs:
     - run: npm install -g bower 
     - run: npm install -g grunt-cli 
     - run: sudo gem install compass  
-    - run : npm install --global yarn
+    - run : brew install --build-from-source yarn
     - run: cd ui 
     - run : npm cache clean --force 
     - run : bower cache clean --force 
