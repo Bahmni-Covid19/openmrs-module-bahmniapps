@@ -28,10 +28,7 @@ jobs:
     - run:  npm install -g grunt-cli 
     - run:  gem install compass  
     - run: npm install --global yarn 
-    - run : cd ui/ 
-    - run : bower cache clean  
-    - run : rm -rf coverage/ 
-    - run: /bin/bash ./scripts/package.sh
+    - run : cd ui && /bin/bash ./scripts/package.sh
     - uses: actions/upload-artifact@v2
       with:
         name: BahmniApps
