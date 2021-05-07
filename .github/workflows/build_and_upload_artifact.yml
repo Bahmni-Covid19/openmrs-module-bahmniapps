@@ -32,8 +32,8 @@ jobs:
     - run : sudo bower cache clean --force 
     - run : rm -rf coverage/ 
     - run : cd ui && yarn
-    - run : sudo yarn ci --force
-    - run : cd dist && zip -r ../target/bahmniapps.zip *
+    - run : cd ui && sudo yarn ci --force
+    - run : cd ui/dist && zip -r ../target/bahmniapps.zip *
     - uses: actions/upload-artifact@v2
       with:
         name: BahmniApps
