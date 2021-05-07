@@ -15,7 +15,6 @@ yarn install
 yarn bundle
 yarn uglify-and-rename
 
-cd $ROOT_DIR
 
 if [ $(pgrep Xvfb) ]; then
     XVFB_PID=$(pgrep Xvfb)
