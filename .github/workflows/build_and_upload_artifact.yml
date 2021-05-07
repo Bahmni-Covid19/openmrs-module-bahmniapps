@@ -24,15 +24,14 @@ jobs:
     - uses: actions/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
+    - run : cd ui/scripts 
     - run: npm install -g bower 
     - run: npm install -g grunt-cli 
     - run: sudo gem install compass  
     - run : npm install --global yarn
-    - run: cd ui 
     - run : npm cache clean --force 
     - run : bower cache clean --force 
     - run : rm -rf coverage/ 
-    - run : cd ui/scripts 
     - run : bash package.sh
     - uses: actions/upload-artifact@v2
       with:
