@@ -20,6 +20,7 @@ angular.module('bahmni.registration')
             $scope.ndhmExtPoint = appService.getAppDescriptor().getExtensions("org.bahmni.registration.identifier.ndhm.source", "link")[0];
             $scope.ndhmIframeSrc = $scope.ndhmExtPoint.src;
             $scope.showNdhmIframe = false;
+            $scope.showVeriyHealthIdBtn = true;
 
             $scope.openNdhmPopup = function () {
                 var ndhmframe = $document[0].getElementById("ndhm");
@@ -28,7 +29,7 @@ angular.module('bahmni.registration')
                     if (ndhmWindowData.data.patient !== undefined) {
                         var patient = ndhmWindowData.data.patient;
                         $scope.healthIdSaved = patient.healthId;
-                        $scope.showVeriyHealthIdBtn = true;
+                        $scope.showVeriyHealthIdBtn = false;
                         $scope.showNdhmIframe = false;
                         for (var i = 0; i < $scope.patient.extraIdentifiers.length; i++) {
                             var identifier = $scope.patient.extraIdentifiers[i];
@@ -228,6 +229,17 @@ angular.module('bahmni.registration')
             $scope.$watch('patientLoaded', function () {
                 if ($scope.patientLoaded) {
                     executeShowOrHideRules();
+                    if ($scope.patient.extraIdentifiers !== undefined) {
+                        $scope.showVeriyHealthIdBtn = false;
+                        for (var i = 0; i < $scope.patient.extraIdentifiers.length; i++) {
+                            var identifier = $scope.patient.extraIdentifiers[i];
+                            if (identifier.identifierType.name === Bahmni.Registration.Constants.patientIdentifiers.healthId &&
+                                identifier.registrationNumber === undefined) {
+                                $scope.showVeriyHealthIdBtn = true;
+                                break;
+                            }
+                        }
+                    }
                 }
             });
 
