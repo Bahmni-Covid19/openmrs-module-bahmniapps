@@ -27,7 +27,6 @@ angular.module('bahmni.registration')
                 $window.addEventListener("message", function (ndhmWindowData) {
                     if (ndhmWindowData.data.patient !== undefined) {
                         var patient = ndhmWindowData.data.patient;
-                        console.log(patient);
                         $scope.healthIdSaved = patient.healthId;
                         $scope.showVeriyHealthIdBtn = true;
                         $scope.showNdhmIframe = false;
