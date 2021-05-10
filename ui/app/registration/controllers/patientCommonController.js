@@ -24,24 +24,60 @@ angular.module('bahmni.registration')
             $scope.openNdhmPopup = function () {
                 var ndhmframe = $document[0].getElementById("ndhm");
                 $scope.showNdhmIframe = true;
-                $window.addEventListener("message", function (healthId) {
-                    $scope.healthIdSaved = healthId.data;
-                    $scope.showVeriyHealthIdBtn = true;
-                    $scope.showNdhmIframe = false;
-                    for (var i = 0; i < $scope.patient.extraIdentifiers.length; i++) {
-                        var identifier = $scope.patient.extraIdentifiers[i];
-                        if (identifier.identifierType.name === Bahmni.Registration.Constants.patientIdentifiers.healthId) {
-                            identifier.registrationNumber = $scope.healthIdSaved;
-                            identifier.generate();
-                            break;
+                $window.addEventListener("message", function (ndhmWindowData) {
+                    if (ndhmWindowData.data.patient !== undefined) {
+                        var patient = ndhmWindowData.data.patient;
+                        console.log(patient);
+                        $scope.healthIdSaved = patient.healthId;
+                        $scope.showVeriyHealthIdBtn = true;
+                        $scope.showNdhmIframe = false;
+                        for (var i = 0; i < $scope.patient.extraIdentifiers.length; i++) {
+                            var identifier = $scope.patient.extraIdentifiers[i];
+                            if (identifier.identifierType.name === Bahmni.Registration.Constants.patientIdentifiers.healthId) {
+                                identifier.registrationNumber = $scope.healthIdSaved;
+                                identifier.generate();
+                                break;
+                            }
                         }
-                    }
-                    $scope.$digest();
+                        if (patient.changedDetails !== undefined) {
+                            changePatientDetails(patient.changedDetails);
+                        }
+                        $scope.$digest();
+                    }    
                 }, false);
                 $timeout(function () {
-                    ndhmframe.contentWindow.postMessage({call: "hipUrl", value: $scope.ndhmExtPoint.extensionParams.hipUrl});
+                    var data = {
+                        'hipUrl': $scope.ndhmExtPoint.extensionParams.hipUrl,
+                        'bahmniUrl': $scope.ndhmExtPoint.extensionParams.bahmniUrl
+                    }
+                    ndhmframe.contentWindow.postMessage({call: "parentData", value: data});
                 }, 2000);
             };
+
+            function changePatientDetails (changedDetails) {
+                for (var key in changedDetails) {
+                    switch (key) {
+                        case 'address':
+                            $scope.patient.address.countyDistrict = changedDetails.address.countyDistrict;
+                            $scope.patient.address.address1 = changedDetails.address.address1;
+                            $scope.patient.address.stateProvince = changedDetails.address.stateProvince;
+                            break;
+                        case 'name':
+                            $scope.patient.givenName = changedDetails.name.givenName;
+                            $scope.patient.familyName = changedDetails.name.familyName;
+                            break;
+                        case 'gender':
+                            $scope.patient.gender = changedDetails.gender;
+                            break;
+                        default:
+                            $scope.patient.age.years = changedDetails.age.years;
+                            $scope.patient.age.months = changedDetails.age.months;
+                            $scope.patient.age.days = changedDetails.age.days;
+                            $scope.patient.calculateBirthDate();
+                            break;
+                    }
+                }
+            }
 
             function initPatientNameDisplayOrder () {
                 var validNameFields = Bahmni.Registration.Constants.patientNameDisplayOrder;
