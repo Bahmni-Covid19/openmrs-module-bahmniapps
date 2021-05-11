@@ -43,6 +43,10 @@ angular.module('bahmni.registration')
                 }, 2000);
             };
 
+            $scope.closeNdhmPopup = function () {
+                $scope.showNdhmIframe = false;
+            };
+
             function initPatientNameDisplayOrder () {
                 var validNameFields = Bahmni.Registration.Constants.patientNameDisplayOrder;
                 var nameFields = appService.getAppDescriptor().getConfigValue("patientNameDisplayOrder") || [];
