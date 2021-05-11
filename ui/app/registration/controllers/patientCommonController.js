@@ -43,13 +43,13 @@ angular.module('bahmni.registration')
                             changePatientDetails(patient.changedDetails);
                         }
                         $scope.$digest();
-                    }    
+                    }
                 }, false);
                 $timeout(function () {
                     var data = {
                         'hipUrl': $scope.ndhmExtPoint.extensionParams.hipUrl,
                         'bahmniUrl': $scope.ndhmExtPoint.extensionParams.bahmniUrl
-                    }
+                    };
                     ndhmframe.contentWindow.postMessage({call: "parentData", value: data});
                 }, 2000);
             };
@@ -57,24 +57,24 @@ angular.module('bahmni.registration')
             function changePatientDetails (changedDetails) {
                 for (var key in changedDetails) {
                     switch (key) {
-                        case 'address':
-                            $scope.patient.address.countyDistrict = changedDetails.address.countyDistrict;
-                            $scope.patient.address.address1 = changedDetails.address.address1;
-                            $scope.patient.address.stateProvince = changedDetails.address.stateProvince;
-                            break;
-                        case 'name':
-                            $scope.patient.givenName = changedDetails.name.givenName;
-                            $scope.patient.familyName = changedDetails.name.familyName;
-                            break;
-                        case 'gender':
-                            $scope.patient.gender = changedDetails.gender;
-                            break;
-                        default:
-                            $scope.patient.age.years = changedDetails.age.years;
-                            $scope.patient.age.months = changedDetails.age.months;
-                            $scope.patient.age.days = changedDetails.age.days;
-                            $scope.patient.calculateBirthDate();
-                            break;
+                    case 'address':
+                        $scope.patient.address.countyDistrict = changedDetails.address.countyDistrict;
+                        $scope.patient.address.address1 = changedDetails.address.address1;
+                        $scope.patient.address.stateProvince = changedDetails.address.stateProvince;
+                        break;
+                    case 'name':
+                        $scope.patient.givenName = changedDetails.name.givenName;
+                        $scope.patient.familyName = changedDetails.name.familyName;
+                        break;
+                    case 'gender':
+                        $scope.patient.gender = changedDetails.gender;
+                        break;
+                    default:
+                        $scope.patient.age.years = changedDetails.age.years;
+                        $scope.patient.age.months = changedDetails.age.months;
+                        $scope.patient.age.days = changedDetails.age.days;
+                        $scope.patient.calculateBirthDate();
+                        break;
                     }
                 }
             }

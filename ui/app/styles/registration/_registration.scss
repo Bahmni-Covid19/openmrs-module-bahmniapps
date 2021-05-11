@@ -138,57 +138,6 @@ body{
   overflow: auto;
   background-color: rgba(0,0,0,0.6);
 
-  .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-}
-.ndhm {
-  .ngdialog-content {
-    width: 800px !important;
-    height: 640px !important;
-    background: white !important;
-  }
-  .NDHM-template{
-      .NDHMDetails {
-          td,th {
-              width:50%;
-              text-align:center;
-              border:0.5px solid rgb(190, 190, 190);
-              word-wrap: break-word;
-          }
-          table-layout:fixed;
-          border:1px solid black;
-          margin-left:auto;
-          margin-right:auto;
-          text-align:center;
-      }
-      .userAuth,.finalButtons{
-          table,tr,td{
-                border:none;
-          }
-       }
-      .finalButtons{
-           text-align: center;
-      }
-      table{
-          margin-top:3%;
-      }
-      .req {
-          font-size: 90%;
-          font-style: italic;
-          color: red;
-      }
-
-  .close:hover, .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
   .ndhm-iframe {    
     background-color: #fefefe;
     margin: auto;
@@ -197,7 +146,22 @@ body{
     width: 40%;
     height: 600px;
   }
+
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .close:hover, .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
 }
+
 .additional-attribute{
   &.active{
     .fa-caret-right{
