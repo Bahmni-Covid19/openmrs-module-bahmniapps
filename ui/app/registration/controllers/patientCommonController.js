@@ -89,7 +89,7 @@ angular.module('bahmni.registration')
                     const patientUuid = ndhmWindowData.data.patientUuid;
                     if (patientUuid !== undefined) {
                         $scope.showNdhmIframe = false;
-                        $window.open("/bahmni/clinical/index.html#/default/patient/" + patientUuid + "/dashboard?currentTab=DASHBOARD_TAB_GENERAL_KEY", "_self");
+                        $window.open("/bahmni/registration/index.html#/patient/" + patientUuid, "_self");
                     }
                 });
             }
