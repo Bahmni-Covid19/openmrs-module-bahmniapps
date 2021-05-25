@@ -25,6 +25,7 @@ angular.module('bahmni.registration')
             $scope.openNdhmPopup = function () {
                 var ndhmframe = $document[0].getElementById("ndhm");
                 $scope.showNdhmIframe = true;
+                redirectToPatientDashBoardEventListener();
                 $window.addEventListener("message", function (ndhmWindowData) {
                     if (ndhmWindowData.data.patient !== undefined) {
                         var patient = ndhmWindowData.data.patient;
@@ -82,6 +83,16 @@ angular.module('bahmni.registration')
             $scope.closeNdhmPopup = function () {
                 $scope.showNdhmIframe = false;
             };
+
+            function redirectToPatientDashBoardEventListener () {
+                $window.addEventListener("message", function (ndhmWindowData) {
+                    const patientUuid = ndhmWindowData.data.patientUuid;
+                    if (patientUuid !== undefined) {
+                        $scope.showNdhmIframe = false;
+                        $window.open("/bahmni/registration/index.html#/patient/" + patientUuid, "_self");
+                    }
+                });
+            }
 
             function initPatientNameDisplayOrder () {
                 var validNameFields = Bahmni.Registration.Constants.patientNameDisplayOrder;
