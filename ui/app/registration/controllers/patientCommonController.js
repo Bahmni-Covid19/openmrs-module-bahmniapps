@@ -24,6 +24,7 @@ angular.module('bahmni.registration')
 
             $scope.openNdhmPopup = function () {
                 var ndhmframe = $document[0].getElementById("ndhm");
+                ndhmframe.src = $scope.ndhmIframeSrc;
                 $scope.showNdhmIframe = true;
                 redirectToPatientDashBoardEventListener();
                 $window.addEventListener("message", function (ndhmWindowData) {
