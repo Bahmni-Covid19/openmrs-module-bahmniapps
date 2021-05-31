@@ -30,7 +30,6 @@ angular.module('bahmni.registration')
                 $window.addEventListener("message", function (ndhmWindowData) {
                     if (ndhmWindowData.data.patient !== undefined) {
                         var patient = ndhmWindowData.data.patient;
-                        console.log(patient);
                         if (patient.uuid !== undefined) {
                             localStorage.setItem("patient", patient);
                             $window.open("/bahmni/registration/index.html#/patient/" + patient.uuid, "_self");
@@ -263,7 +262,6 @@ angular.module('bahmni.registration')
                     }
                     var patient = localStorage.getItem("patient");
                     if (patient !== null) {
-                        console.log(patient);
                         changePatientDetails(patient.changedDetails);
                         localStorage.removeItem("patient");
                     }
