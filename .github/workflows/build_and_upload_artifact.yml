@@ -3,7 +3,11 @@
 
 name: Build Bahmni Apps - Stream1 Master
 
-on: [workflow_dispatch]
+on:
+ push:
+    branches:
+     - stream1/master
+ workflow_dispatch:
 
 jobs:
   build:
