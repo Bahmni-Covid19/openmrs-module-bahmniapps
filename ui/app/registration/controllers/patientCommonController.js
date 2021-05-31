@@ -31,23 +31,10 @@ angular.module('bahmni.registration')
                     if (ndhmWindowData.data.patient !== undefined) {
                         var patient = ndhmWindowData.data.patient;
                         if (patient.uuid !== undefined) {
-                            localStorage.setItem("patient", patient);
+                            localStorage.setItem("patient", JSON.stringify(patient));
                             $window.open("/bahmni/registration/index.html#/patient/" + patient.uuid, "_self");
                         }
-                        $scope.healthIdSaved = patient.healthId;
-                        $scope.showVeriyHealthIdBtn = false;
-                        $scope.showNdhmIframe = false;
-                        for (var i = 0; i < $scope.patient.extraIdentifiers.length; i++) {
-                            var identifier = $scope.patient.extraIdentifiers[i];
-                            if (identifier.identifierType.name === Bahmni.Registration.Constants.patientIdentifiers.healthId) {
-                                identifier.registrationNumber = $scope.healthIdSaved;
-                                identifier.generate();
-                                break;
-                            }
-                        }
-                        if (patient.changedDetails !== undefined) {
-                            changePatientDetails(patient.changedDetails);
-                        }
+                        update(patient);
                         $scope.$digest();
                     }
                 }, false);
@@ -59,6 +46,23 @@ angular.module('bahmni.registration')
                     ndhmframe.contentWindow.postMessage({call: "parentData", value: data});
                 }, 2000);
             };
+
+            function update(patient) {
+                $scope.healthIdSaved = patient.healthId;
+                $scope.showVeriyHealthIdBtn = false;
+                $scope.showNdhmIframe = false;
+                for (var i = 0; i < $scope.patient.extraIdentifiers.length; i++) {
+                    var identifier = $scope.patient.extraIdentifiers[i];
+                    if (identifier.identifierType.name === Bahmni.Registration.Constants.patientIdentifiers.healthId) {
+                        identifier.registrationNumber = $scope.healthIdSaved;
+                        identifier.generate();
+                        break;
+                    }
+                }
+                if (patient.changedDetails !== undefined) {
+                    changePatientDetails(patient.changedDetails);
+                }
+            }
 
             function changePatientDetails (changedDetails) {
                 for (var key in changedDetails) {
@@ -260,9 +264,9 @@ angular.module('bahmni.registration')
                             }
                         }
                     }
-                    var patient = localStorage.getItem("patient");
+                    var patient = JSON.parse(localStorage.getItem("patient"));
                     if (patient !== null) {
-                        changePatientDetails(patient.changedDetails);
+                        update(patient);
                         localStorage.removeItem("patient");
                     }
                 }
