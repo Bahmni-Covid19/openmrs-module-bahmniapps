@@ -79,6 +79,10 @@ angular.module('bahmni.registration')
                     case 'gender':
                         $scope.patient.gender = changedDetails.gender;
                         break;
+                    case 'phoneNumber':
+                        $scope.patient.primaryContact = changedDetails.phoneNumber;
+                        break;
+
                     default:
                         $scope.patient.age.years = changedDetails.age.years;
                         $scope.patient.age.months = changedDetails.age.months;
