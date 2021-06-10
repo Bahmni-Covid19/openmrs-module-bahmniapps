@@ -82,7 +82,6 @@ angular.module('bahmni.registration')
                     case 'phoneNumber':
                         $scope.patient.primaryContact = changedDetails.phoneNumber;
                         break;
-
                     default:
                         $scope.patient.age.years = changedDetails.age.years;
                         $scope.patient.age.months = changedDetails.age.months;
