@@ -47,7 +47,7 @@ angular.module('bahmni.registration')
                 }, 2000);
             };
 
-            function update(patient) {
+            function update (patient) {
                 $scope.healthIdSaved = patient.healthId;
                 $scope.showVeriyHealthIdBtn = false;
                 $scope.showNdhmIframe = false;
@@ -74,6 +74,7 @@ angular.module('bahmni.registration')
                         break;
                     case 'name':
                         $scope.patient.givenName = changedDetails.name.givenName;
+                        $scope.patient.middleName = changedDetails.name.middleName;
                         $scope.patient.familyName = changedDetails.name.familyName;
                         break;
                     case 'gender':
