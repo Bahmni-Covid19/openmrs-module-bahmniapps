@@ -11,6 +11,9 @@
             <th colspan="4" ng-if="::isOtherActiveSection(drugOrderSection.visitDate)">
                 {{::drugOrderSection.visitDate}}
             </th>
+            <th><a href="" ng-click="viewPrescription(params.patientUuid)"> <i class="fa fa-eye" aria-hidden="true"></i></a></th>
+
+            <th><i class="fa fa-envelope" aria-hidden="true"></i></th>
             </thead>
             <tbody treatment-table-row drug-order="::drugOrder" params="::params"
                    ng-repeat="drugOrder in ::drugOrderSection.drugOrders | orderBy: '::effectiveStartDate'"
@@ -18,6 +21,13 @@
                    ng-if="::drugOrderSection.drugOrders.length > 0">
             </tbody>
         </table>
+        <div id="myModal" ng-if= "showPrescription" class="modal" style="width:700;height:700;">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <i class="fa fa-close" onclick="close()"></i>
+                <iframe id = "preview"   src="/preview-prescription/medical-prescription.pdf" height="600" width="600"></iframe></div>
+            </div>
+        </div>
 
     </div>
 </section>

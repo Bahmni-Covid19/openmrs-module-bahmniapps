@@ -66,3 +66,15 @@
 
 @import "bedmanagement/bedmanagement";
 @import "bedmanagement/wardLayout";
+
+.printPreview{
+    left: 0;
+    top: 0;
+    margin-top:100px;
+    margin-left:400px;
+    margin-right:400px;
+    overflow: auto;
+    }
+.float-right{
+    float:right;
+  }

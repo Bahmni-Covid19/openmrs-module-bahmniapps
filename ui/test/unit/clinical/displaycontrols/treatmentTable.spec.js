@@ -21,13 +21,14 @@ describe('Treatment Table DisplayControl', function () {
         otherActiveDrugOrderSection
     ];
 
-    beforeEach(module('bahmni.clinical'));
+    beforeEach(module('bahmni.clinical', 'ngDialog'));
 
     beforeEach(inject(['$compile', '$httpBackend', '$rootScope', function ($compile, $httpBackend, $rootScope) {
         compile = $compile;
         mockBackend = $httpBackend;
         rootScope = $rootScope;
     }]));
+
 
     it("should return true if the section is other active drug orders", function () {
         var scope = rootScope.$new();
